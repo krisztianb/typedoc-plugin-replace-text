@@ -17,7 +17,7 @@ This can be useful for:
 -   Creating links from author names (eg: link "Your Name" to your GitHub or corporate profile page)
 -   Replacing internal URLs with external ones
 -   Replacing custom placeholders with anything you like (eg: images)
--   Remove URLs or other text from comments
+-   Remove URLs or other text
 -   etc.
 
 ## Installation
@@ -37,7 +37,33 @@ The plugin requires TypeDoc version 0.21.x or 0.22.x to be installed.
 
 ## Configuration
 
-TODO
+Extend your [TypeDoc config file](https://typedoc.org/guides/options/) with a new option named `replaceText`. The option is defined as an object that looks like this:
+
+```json
+"replaceText": {
+    "inCodeComments": true,
+    "inReadme": true,
+    "replacements": [
+        {
+            "pattern": "(GH-(\\d+))",
+            "replace": "[$1](https://github.com/your-name/the-repo/issues/$2)"
+        },
+        {
+            "pattern": "King Kong",
+            "flags": "gi",
+            "replace": "[King Kong](https://github.com/king-kong)"
+        }
+    ]
+}
+```
+
+Explanation:
+
+| Property           | Description                                                                   |
+| ------------------ | ----------------------------------------------------------------------------- |
+| **inCodeComments** | Specifies if the plugin should replace in code comments. (optional - defaults to `true`) |
+| **inReadme**       | Specifies if the plugin should replace in your README file. (optional - defaults to `true`) |
+| **replacements**   | The search patterns and texts they should be replaced with. (`pattern` is the search Regex, `flags` are the optional Regex flags that default to `g` and `replace` is the inserted text) |
 
 ## Bugs
 
