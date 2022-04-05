@@ -6,9 +6,23 @@ import { Application, ParameterType } from "typedoc";
 declare module "typedoc" {
     // eslint-disable-next-line @typescript-eslint/consistent-type-definitions -- This is not a separate type.
     export interface TypeDocOptionMap {
-        "replace-in-comments-config": ReplaceInfoFromConfig[];
+        replaceText: PluginConfig;
     }
 }
+
+/**
+ * A type for the options of the plugin.
+ */
+type PluginConfig = {
+    /** Should the plugin replace in code comments? */
+    inCodeComments?: boolean;
+
+    /** Should the plugin replace in the content of the README.md file? */
+    inReadme?: boolean;
+
+    /** The objects describing what and with what it should be replaced. */
+    replacements?: ReplaceInfoFromConfig[];
+};
 
 /**
  * A type describing what should be replaced by what as it is defined by the user in the config.
@@ -39,6 +53,12 @@ type ReplaceInfoWithRegex = {
  * Class storing the options of the plugin.
  */
 export class PluginOptions {
+    /** Should the plugin replace in code comments? */
+    private _replaceInCodeComments = true;
+
+    /** Should the plugin replace in the content of the README.md file? */
+    private _replaceInReadme = true;
+
     /** The replace information. */
     private _replacements: ReplaceInfoWithRegex[] = [];
 
@@ -50,7 +70,7 @@ export class PluginOptions {
     public addToApplication(typedoc: Readonly<Application>): void {
         typedoc.options.addDeclaration({
             type: ParameterType.Mixed,
-            name: "replace-in-comments-config",
+            name: "replaceText",
             help: "The array with the objects defining the replacement patterns.",
             defaultValue: [],
         });
@@ -62,12 +82,40 @@ export class PluginOptions {
      */
     public readValuesFromApplication(typedoc: Readonly<Application>): void {
         // Yes this type assertion sucks, but there's something wrong with the Type Definitions of TypeDoc
-        const config = typedoc.options.getValue("replace-in-comments-config") as unknown as ReplaceInfoFromConfig[];
+        const config = typedoc.options.getValue("replaceText") as unknown as PluginConfig | undefined;
 
-        // Convert patterns and flags to regular expressions and cache them
-        this._replacements = config.map((x) => {
-            return { regex: new RegExp(x.pattern, x.flags ?? "g"), replace: x.replace };
-        });
+        if (config) {
+            if (config.inCodeComments !== undefined) {
+                this._replaceInCodeComments = config.inCodeComments;
+            }
+
+            if (config.inReadme !== undefined) {
+                this._replaceInReadme = config.inReadme;
+            }
+
+            if (Array.isArray(config.replacements)) {
+                // Convert patterns and flags to regular expressions and cache them
+                this._replacements = config.replacements.map((x) => {
+                    return { regex: new RegExp(x.pattern, x.flags ?? "g"), replace: x.replace };
+                });
+            }
+        }
+    }
+
+    /**
+     * Returns if the plugin should apply the replacements to code comments.
+     * @returns True if the plugin should apply the replacements to code comments, otherwise false.
+     */
+    public get replaceInCodeComments(): boolean {
+        return this._replaceInCodeComments;
+    }
+
+    /**
+     * Returns if the plugin should apply the replacements to the README.md content.
+     * @returns True if the plugin should apply the replacements to the README.md content, otherwise false.
+     */
+    public get replaceInReadme(): boolean {
+        return this._replaceInReadme;
     }
 
     /**

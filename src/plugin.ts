@@ -52,27 +52,33 @@ export class Plugin {
         if (this.options.replacements.length > 0) {
             const project = context.project;
 
-            // go through all the reflections' comments
-            for (const key in project.reflections) {
-                const reflection = project.reflections[key];
+            if (this.options.replaceInReadme && project.readme) {
+                project.readme = this.applyReplacements(project.readme);
+            }
 
-                if (reflection.comment) {
-                    reflection.comment.shortText = this.replaceInComment(reflection.comment.shortText);
-                    reflection.comment.text = this.replaceInComment(reflection.comment.text);
-                    reflection.comment.tags.forEach((t) => (t.text = this.replaceInComment(t.text)));
+            if (this.options.replaceInCodeComments) {
+                // go through all the reflections' comments
+                for (const key in project.reflections) {
+                    const reflection = project.reflections[key];
+
+                    if (reflection.comment) {
+                        reflection.comment.shortText = this.applyReplacements(reflection.comment.shortText);
+                        reflection.comment.text = this.applyReplacements(reflection.comment.text);
+                        reflection.comment.tags.forEach((t) => (t.text = this.applyReplacements(t.text)));
+                    }
                 }
             }
         }
     }
 
     /**
-     * Applies the replacement info to the comment.
-     * @param comment The comment on which to apply the replacement info.
-     * @returns The modified comment.
+     * Applies the replacements to the given text.
+     * @param text The text on which to apply the replacements.
+     * @returns The modified text.
      */
-    private replaceInComment(comment: string): string {
-        this.options.replacements.forEach((r) => (comment = comment.replace(r.regex, r.replace)));
+    private applyReplacements(text: string): string {
+        this.options.replacements.forEach((r) => (text = text.replace(r.regex, r.replace)));
 
-        return comment;
+        return text;
     }
 }
