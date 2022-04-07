@@ -17,6 +17,7 @@ This can be useful for:
 -   Creating links from author names (eg: link "Your Name" to your GitHub or corporate profile page)
 -   Replacing internal URLs with external ones
 -   Replacing custom placeholders with anything you like (eg: images)
+-   Remove or replace text in your README.md file that is included by TypeDoc
 -   Remove URLs or other text
 -   etc.
 
@@ -28,8 +29,7 @@ This module can be installed using [npm](https://www.npmjs.com/package/typedoc-p
 $ npm install typedoc-plugin-replace-text --save-dev
 ```
 
-TypeDoc automatically detects plugins installed via npm. After installation TypeDoc can be used normally and you can
-configure this plugin as described below.
+TypeDoc automatically detects plugins installed via npm. After installation TypeDoc can be used normally and you can configure this plugin as described below.
 
 ### Requirements
 
@@ -41,8 +41,9 @@ Extend your [TypeDoc config file](https://typedoc.org/guides/options/) with a ne
 
 ```json
 "replaceText": {
-    "inCodeComments": true,
-    "inReadme": true,
+    "inCodeCommentText": true,
+    "inCodeCommentTags": true,
+    "inIncludedFiles": true,
     "replacements": [
         {
             "pattern": "(GH-(\\d+))",
@@ -59,11 +60,12 @@ Extend your [TypeDoc config file](https://typedoc.org/guides/options/) with a ne
 
 Explanation:
 
-| Property           | Description                                                                   |
-| ------------------ | ----------------------------------------------------------------------------- |
-| **inCodeComments** | Specifies if the plugin should replace in code comments. (optional - defaults to `true`) |
-| **inReadme**       | Specifies if the plugin should replace in your README file. (optional - defaults to `true`) |
-| **replacements**   | The search patterns and texts they should be replaced with. (`pattern` is the search Regex, `flags` are the optional Regex flags that default to `g` and `replace` is the inserted text) |
+| Property              | Description                                                                   |
+| --------------------- | ----------------------------------------------------------------------------- |
+| **inCodeCommentText** | Specifies if the plugin should replace in the text of comments (not including the text of tags like the description of parameters for a method) in your code. (optional - defaults to `true`) |
+| **inCodeCommentTags** | Specifies if the plugin should replace in the text of tags (like the description of parameters for a method) in your code comments. (optional - defaults to `true`) |
+| **inIncludedFiles**   | Specifies if the plugin should replace in your README file. (optional - defaults to `true`) |
+| **replacements**      | The search patterns and texts they should be replaced with. (`pattern` is the search Regex, `flags` are the optional Regex flags that default to `g` and `replace` is the inserted text) |
 
 ## Bugs
 

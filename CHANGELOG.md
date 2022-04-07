@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.0] - 2020-09-12
+## [1.0.0] - 2022-04-07
 First release
 
-[unreleased]: https://github.com/krisztianb/typedoc-plugin-replace-in-comments/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/krisztianb/typedoc-plugin-replace-in-comments/releases/tag/v1.0.0
+[unreleased]: https://github.com/krisztianb/typedoc-plugin-replace-text/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/krisztianb/typedoc-plugin-replace-text/releases/tag/v1.0.0

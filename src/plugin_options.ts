@@ -14,11 +14,14 @@ declare module "typedoc" {
  * A type for the options of the plugin.
  */
 type PluginConfig = {
-    /** Should the plugin replace in code comments? */
-    inCodeComments?: boolean;
+    /** Should the plugin replace in the text of code comments? */
+    inCodeCommentText?: boolean;
+
+    /** Should the plugin replace in the text of code comment tags? */
+    inCodeCommentTags?: boolean;
 
     /** Should the plugin replace in the content of the README.md file? */
-    inReadme?: boolean;
+    inIncludedFiles?: boolean;
 
     /** The objects describing what and with what it should be replaced. */
     replacements?: ReplaceInfoFromConfig[];
@@ -53,11 +56,14 @@ type ReplaceInfoWithRegex = {
  * Class storing the options of the plugin.
  */
 export class PluginOptions {
-    /** Should the plugin replace in code comments? */
-    private _replaceInCodeComments = true;
+    /** Should the plugin replace in the text of code comments? */
+    private _replaceInCodeCommentText = true;
+
+    /** Should the plugin replace in the text of code comment tags? */
+    private _replaceInCodeCommentTags = true;
 
     /** Should the plugin replace in the content of the README.md file? */
-    private _replaceInReadme = true;
+    private _replaceInIncludedFiles = true;
 
     /** The replace information. */
     private _replacements: ReplaceInfoWithRegex[] = [];
@@ -71,8 +77,8 @@ export class PluginOptions {
         typedoc.options.addDeclaration({
             type: ParameterType.Mixed,
             name: "replaceText",
-            help: "The array with the objects defining the replacement patterns.",
-            defaultValue: [],
+            help: "The configuration object of the replace-text plugin.",
+            defaultValue: {},
         });
     }
 
@@ -81,16 +87,20 @@ export class PluginOptions {
      * @param typedoc The TypeDoc application.
      */
     public readValuesFromApplication(typedoc: Readonly<Application>): void {
-        // Yes this type assertion sucks, but there's something wrong with the Type Definitions of TypeDoc
+        // Yes, this type assertion sucks, but there's something wrong with the Type Definitions of TypeDoc
         const config = typedoc.options.getValue("replaceText") as unknown as PluginConfig | undefined;
 
         if (config) {
-            if (config.inCodeComments !== undefined) {
-                this._replaceInCodeComments = config.inCodeComments;
+            if (config.inCodeCommentText !== undefined) {
+                this._replaceInCodeCommentText = config.inCodeCommentText;
             }
 
-            if (config.inReadme !== undefined) {
-                this._replaceInReadme = config.inReadme;
+            if (config.inCodeCommentTags !== undefined) {
+                this._replaceInCodeCommentTags = config.inCodeCommentTags;
+            }
+
+            if (config.inIncludedFiles !== undefined) {
+                this._replaceInIncludedFiles = config.inIncludedFiles;
             }
 
             if (Array.isArray(config.replacements)) {
@@ -103,19 +113,27 @@ export class PluginOptions {
     }
 
     /**
-     * Returns if the plugin should apply the replacements to code comments.
-     * @returns True if the plugin should apply the replacements to code comments, otherwise false.
+     * Returns if the plugin should apply the replacements to the text of code comments.
+     * @returns True if the plugin should apply the replacements to the text of code comments, otherwise false.
      */
-    public get replaceInCodeComments(): boolean {
-        return this._replaceInCodeComments;
+    public get replaceInCodeCommentText(): boolean {
+        return this._replaceInCodeCommentText;
+    }
+
+    /**
+     * Returns if the plugin should apply the replacements to the text of code comment tags.
+     * @returns True if the plugin should apply the replacements to the text of code comment tags, otherwise false.
+     */
+    public get replaceInCodeCommentTags(): boolean {
+        return this._replaceInCodeCommentTags;
     }
 
     /**
      * Returns if the plugin should apply the replacements to the README.md content.
      * @returns True if the plugin should apply the replacements to the README.md content, otherwise false.
      */
-    public get replaceInReadme(): boolean {
-        return this._replaceInReadme;
+    public get replaceInIncludedFiles(): boolean {
+        return this._replaceInIncludedFiles;
     }
 
     /**

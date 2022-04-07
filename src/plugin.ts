@@ -2,16 +2,16 @@ import { Application, Context, Converter } from "typedoc";
 import { PluginOptions } from "./plugin_options";
 
 /**
- * The "replace in comments" plugin.
+ * The "Replace Text" plugin.
  *
  * # What does it do?
  *
- * This plugin replaces text in comments with other text.
+ * This plugin replaces text in the documentation with other text.
  *
  * # How does it do it?
  *
  * The plugin scans through all comments of all reflections and uses the replacment patterns specified
- * by the user to replace text in these comments.
+ * by the user to replace texts.
  */
 export class Plugin {
     /** The options of this plugin. */
@@ -49,26 +49,43 @@ export class Plugin {
      * @param context Describes the current state the converter is in.
      */
     public onConverterResolveBegin(context: Readonly<Context>): void {
-        if (this.options.replacements.length > 0) {
-            const project = context.project;
+        if (!this.hasSomethingTodo) {
+            return;
+        }
 
-            if (this.options.replaceInReadme && project.readme) {
-                project.readme = this.applyReplacements(project.readme);
-            }
+        const project = context.project;
 
-            if (this.options.replaceInCodeComments) {
-                // go through all the reflections' comments
-                for (const key in project.reflections) {
-                    const reflection = project.reflections[key];
+        if (this.options.replaceInIncludedFiles && project.readme) {
+            project.readme = this.applyReplacements(project.readme);
+        }
 
-                    if (reflection.comment) {
-                        reflection.comment.shortText = this.applyReplacements(reflection.comment.shortText);
-                        reflection.comment.text = this.applyReplacements(reflection.comment.text);
-                        reflection.comment.tags.forEach((t) => (t.text = this.applyReplacements(t.text)));
-                    }
+        // go through all the reflections' comments
+        for (const key in project.reflections) {
+            const reflection = project.reflections[key];
+
+            if (reflection.comment) {
+                if (this.options.replaceInCodeCommentText) {
+                    reflection.comment.shortText = this.applyReplacements(reflection.comment.shortText);
+                    reflection.comment.text = this.applyReplacements(reflection.comment.text);
+                }
+                if (this.options.replaceInCodeCommentTags) {
+                    reflection.comment.tags.forEach((t) => (t.text = this.applyReplacements(t.text)));
                 }
             }
         }
+    }
+
+    /**
+     * Checks if the plugin is configured in a way that it has something to do.
+     * @returns True, if the plugin has something to do, otherwise false.
+     */
+    private get hasSomethingTodo(): boolean {
+        const shouldReplaceSomething =
+            this.options.replaceInCodeCommentText ||
+            this.options.replaceInCodeCommentTags ||
+            this.options.replaceInIncludedFiles;
+
+        return shouldReplaceSomething && this.options.replacements.length > 0;
     }
 
     /**
