@@ -33,7 +33,7 @@ TypeDoc automatically detects plugins installed via npm. After installation Type
 
 ### Requirements
 
-The plugin requires TypeDoc version 0.21.x or 0.22.x to be installed.
+The plugin requires TypeDoc version 0.23.x to be installed.
 
 ## Configuration
 
