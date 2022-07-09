@@ -1,4 +1,4 @@
-import { Application, Context, Converter } from "typedoc";
+import { Application, CommentDisplayPart, Context, Converter } from "typedoc";
 import { PluginOptions } from "./plugin_options";
 
 /**
@@ -56,7 +56,7 @@ export class Plugin {
         const project = context.project;
 
         if (this.options.replaceInIncludedFiles && project.readme) {
-            project.readme = this.applyReplacements(project.readme);
+            this.applyReplacementsTo(project.readme);
         }
 
         // go through all the reflections' comments
@@ -65,11 +65,10 @@ export class Plugin {
 
             if (reflection.comment) {
                 if (this.options.replaceInCodeCommentText) {
-                    reflection.comment.shortText = this.applyReplacements(reflection.comment.shortText);
-                    reflection.comment.text = this.applyReplacements(reflection.comment.text);
+                    this.applyReplacementsTo(reflection.comment.summary);
                 }
                 if (this.options.replaceInCodeCommentTags) {
-                    reflection.comment.tags.forEach((t) => (t.text = this.applyReplacements(t.text)));
+                    reflection.comment.blockTags.forEach((tag) => this.applyReplacementsTo(tag.content));
                 }
             }
         }
@@ -89,13 +88,12 @@ export class Plugin {
     }
 
     /**
-     * Applies the replacements to the given text.
-     * @param text The text on which to apply the replacements.
-     * @returns The modified text.
+     * Applies the replacements to the given text parts.
+     * @param parts The text parts on which to apply the replacements.
      */
-    private applyReplacements(text: string): string {
-        this.options.replacements.forEach((r) => (text = text.replace(r.regex, r.replace)));
-
-        return text;
+    private applyReplacementsTo(parts: CommentDisplayPart[]): void {
+        parts.forEach((part) => {
+            this.options.replacements.forEach((r) => (part.text = part.text.replace(r.regex, r.replace)));
+        });
     }
 }
