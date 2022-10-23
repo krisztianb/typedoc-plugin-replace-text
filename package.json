@@ -12,16 +12,16 @@
     ],
     "devDependencies": {
         "@types/node": "14.18.1",
-        "@typescript-eslint/eslint-plugin": "5.30.5",
-        "@typescript-eslint/parser": "5.30.5",
-        "eslint": "8.19.0",
-        "eslint-plugin-jsdoc": "39.3.3",
+        "@typescript-eslint/eslint-plugin": "5.40.1",
+        "@typescript-eslint/parser": "5.40.1",
+        "eslint": "8.26.0",
+        "eslint-plugin-jsdoc": "39.3.20",
         "eslint-plugin-ordered-imports": "0.6.0",
-        "eslint-plugin-unicorn": "43.0.1",
+        "eslint-plugin-unicorn": "44.0.2",
         "prettier": "2.7.1",
         "rimraf": "3.0.2",
-        "typedoc": "0.23.6",
-        "typescript": "4.7.4"
+        "typedoc": "0.23.17",
+        "typescript": "4.8.4"
     },
     "peerDependencies": {
         "typedoc": "0.23.x"
@@ -35,10 +35,8 @@
         "/dist"
     ],
     "scripts": {
-        "lint": "npx eslint ./src",
-        "format": "npx prettier --check ./src",
-        "clean": "rimraf dist",
-        "build": "npx tsc",
-        "clean-build": "npm run clean && npm run build"
+        "lint": "eslint ./src",
+        "format": "prettier --check ./src",
+        "build": "rimraf dist && tsc"
     }
 }
