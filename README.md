@@ -7,7 +7,8 @@ This is a plugin for [TypeDoc](https://github.com/TypeStrong/typedoc) that repla
 This includes:
 
 -   Text in code comments
--   Text in the README
+-   Text in the main README
+-   Text in [included markdown files](https://typedoc.org/guides/options/#includes)
 
 You can specify matching patterns and the text they should be replaced with.
 
@@ -15,10 +16,9 @@ This can be useful for:
 
 -   Creating links from ticket IDs (eg: replace "GH-12345" with a link to https://github.com/your-name/the-repo/issues/12345)
 -   Creating links from author names (eg: link "Your Name" to your GitHub or corporate profile page)
--   Replacing internal URLs with external ones
+-   Replacing internal URLs (domains) with external ones
 -   Replacing custom placeholders with anything you like (eg: images)
--   Remove or replace text in your README.md file that is included by TypeDoc
--   Remove URLs or other text
+-   Removing URLs or other text from your documentation
 -   etc.
 
 ## Installation
@@ -64,7 +64,7 @@ Explanation:
 | --------------------- | ----------------------------------------------------------------------------- |
 | **inCodeCommentText** | Specifies if the plugin should replace in the text of comments (not including the text of tags like the description of parameters for a method) in your code. (optional - defaults to `true`) |
 | **inCodeCommentTags** | Specifies if the plugin should replace in the text of tags (like the description of parameters for a method) in your code comments. (optional - defaults to `true`) |
-| **inIncludedFiles**   | Specifies if the plugin should replace in your README file. (optional - defaults to `true`) |
+| **inIncludedFiles**   | Specifies if the plugin should replace in included markdown files (this includes the main README). (optional - defaults to `true`) |
 | **replacements**      | The search patterns and texts they should be replaced with. (`pattern` is the search Regex, `flags` are the optional Regex flags that default to `g` and `replace` is the inserted text) |
 
 ## Bugs

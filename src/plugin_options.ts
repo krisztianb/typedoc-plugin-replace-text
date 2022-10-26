@@ -86,7 +86,7 @@ export class PluginOptions {
      * Reads the values of the plugin options from the application options.
      * @param typedoc The TypeDoc application.
      */
-    public readValuesFromApplication(typedoc: Readonly<Application>): void {
+    public readValuesFromTypeDocApplication(typedoc: Readonly<Application>): void {
         // Yes, this type assertion sucks, but there's something wrong with the Type Definitions of TypeDoc
         const config = typedoc.options.getValue("replaceText") as unknown as PluginConfig | undefined;
 

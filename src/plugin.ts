@@ -1,4 +1,4 @@
-import { Application, CommentDisplayPart, Context, Converter } from "typedoc";
+import { Application, CommentDisplayPart, Context, Converter, MarkdownEvent } from "typedoc";
 import { PluginOptions } from "./plugin_options";
 
 /**
@@ -10,8 +10,7 @@ import { PluginOptions } from "./plugin_options";
  *
  * # How does it do it?
  *
- * The plugin scans through all comments of all reflections and uses the replacment patterns specified
- * by the user to replace texts.
+ * The plugin scans through all comments of all reflections and uses the replacment patterns specified by the user.
  */
 export class Plugin {
     /** The options of this plugin. */
@@ -32,32 +31,33 @@ export class Plugin {
      * @param typedoc The TypeDoc application.
      */
     private subscribeToApplicationEvents(typedoc: Readonly<Application>): void {
-        typedoc.converter.on(Converter.EVENT_BEGIN, (c: Readonly<Context>) => this.onConverterBegin(c));
-        typedoc.converter.on(Converter.EVENT_RESOLVE_BEGIN, (c: Readonly<Context>) => this.onConverterResolveBegin(c));
+        typedoc.converter.on(Converter.EVENT_BEGIN, (c: Readonly<Context>) => this.onTypeDocConverterBegin(c));
+        typedoc.converter.on(Converter.EVENT_RESOLVE_BEGIN, (c: Readonly<Context>) =>
+            this.onTypeDocConverterResolveBegin(c),
+        );
+
+        // The priority makes sure that our event handler is called before TypeDoc converts the markdown content
+        typedoc.renderer.on(MarkdownEvent.PARSE, (e: MarkdownEvent) => this.onTypeDocMarkdownParse(e), typedoc, 100);
     }
 
     /**
-     * Triggered when the converter begins converting a project.
-     * @param context Describes the current state the converter is in.
+     * Triggered when the TypeDoc converter begins converting a project.
+     * @param context Describes the current state the TypeDoc converter is in.
      */
-    public onConverterBegin(context: Readonly<Context>): void {
-        this.options.readValuesFromApplication(context.converter.owner);
+    public onTypeDocConverterBegin(context: Readonly<Context>): void {
+        this.options.readValuesFromTypeDocApplication(context.converter.owner);
     }
 
     /**
      * Triggered when the TypeDoc converter begins resolving a project.
-     * @param context Describes the current state the converter is in.
+     * @param context Describes the current state the TypeDoc converter is in.
      */
-    public onConverterResolveBegin(context: Readonly<Context>): void {
+    public onTypeDocConverterResolveBegin(context: Readonly<Context>): void {
         if (!this.hasSomethingTodo) {
             return;
         }
 
         const project = context.project;
-
-        if (this.options.replaceInIncludedFiles && project.readme) {
-            this.applyReplacementsTo(project.readme);
-        }
 
         // go through all the reflections' comments
         for (const key in project.reflections) {
@@ -65,12 +65,26 @@ export class Plugin {
 
             if (reflection.comment) {
                 if (this.options.replaceInCodeCommentText) {
-                    this.applyReplacementsTo(reflection.comment.summary);
+                    this.applyReplacementsToCommentParts(reflection.comment.summary);
                 }
                 if (this.options.replaceInCodeCommentTags) {
-                    reflection.comment.blockTags.forEach((tag) => this.applyReplacementsTo(tag.content));
+                    reflection.comment.blockTags.forEach((tag) => this.applyReplacementsToCommentParts(tag.content));
                 }
             }
+        }
+    }
+
+    /**
+     * Triggered when the TypeDoc renderer parses a Markdown file.
+     * @param event Markdown parsing event information.
+     */
+    public onTypeDocMarkdownParse(event: MarkdownEvent): void {
+        if (!this.hasSomethingTodo) {
+            return;
+        }
+
+        if (this.options.replaceInIncludedFiles) {
+            event.parsedText = this.applyReplacementsToString(event.parsedText);
         }
     }
 
@@ -91,9 +105,22 @@ export class Plugin {
      * Applies the replacements to the given text parts.
      * @param parts The text parts on which to apply the replacements.
      */
-    private applyReplacementsTo(parts: CommentDisplayPart[]): void {
+    private applyReplacementsToCommentParts(parts: CommentDisplayPart[]): void {
         parts.forEach((part) => {
-            this.options.replacements.forEach((r) => (part.text = part.text.replace(r.regex, r.replace)));
+            part.text = this.applyReplacementsToString(part.text);
         });
+    }
+
+    /**
+     * Applies the replacements to the given string.
+     * @param str The string on which to apply the replacements.
+     * @returns The string with the replacements applied to it.
+     */
+    private applyReplacementsToString(str: string): string {
+        let result = str;
+
+        this.options.replacements.forEach((r) => (result = result.replace(r.regex, r.replace)));
+
+        return result;
     }
 }
