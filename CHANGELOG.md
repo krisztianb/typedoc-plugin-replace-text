@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.0] - 2023-04-15
+### Changes
+-   Added support for latest TypeDoc version 0.24.x.
+
 ## [2.1.0] - 2022-10-26
 ### Changes
 -   Option value `inIncludedFiles` now also applies to all included markdown files.
@@ -18,7 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2022-04-07
 First release
 
-[unreleased]: https://github.com/krisztianb/typedoc-plugin-replace-text/compare/v2.1.0...HEAD
+[unreleased]: https://github.com/krisztianb/typedoc-plugin-replace-text/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/krisztianb/typedoc-plugin-replace-text/releases/tag/v2.2.0
 [2.1.0]: https://github.com/krisztianb/typedoc-plugin-replace-text/releases/tag/v2.1.0
 [2.0.0]: https://github.com/krisztianb/typedoc-plugin-replace-text/releases/tag/v2.0.0
 [1.0.0]: https://github.com/krisztianb/typedoc-plugin-replace-text/releases/tag/v1.0.0

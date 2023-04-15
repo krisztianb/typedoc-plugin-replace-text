@@ -29,11 +29,14 @@ This module can be installed using [npm](https://www.npmjs.com/package/typedoc-p
 $ npm install typedoc-plugin-replace-text --save-dev
 ```
 
-TypeDoc automatically detects plugins installed via npm. After installation TypeDoc can be used normally and you can configure this plugin as described below.
+Version **0.23.x** of TypeDoc automatically detects plugins installed via npm.
+If you are using version **0.24.x** of TypeDoc you need to [activate the plugin with a command line argument](https://typedoc.org/options/configuration/#plugin).
+
+After installation TypeDoc can be used normally and you can configure this plugin as described below.
 
 ### Requirements
 
-The plugin requires TypeDoc version 0.23.x to be installed.
+The plugin requires TypeDoc version 0.23.x or 0.24.x to be installed.
 
 ## Configuration
 
