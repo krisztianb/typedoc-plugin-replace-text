@@ -1,6 +1,6 @@
 {
     "name": "typedoc-plugin-replace-text",
-    "version": "2.1.0",
+    "version": "2.2.0",
     "description": "Plugin for TypeDoc that replaces text in the documentation",
     "author": {
         "name": "Krisztián Balla",
@@ -12,19 +12,19 @@
     ],
     "devDependencies": {
         "@types/node": "14.18.1",
-        "@typescript-eslint/eslint-plugin": "5.40.1",
-        "@typescript-eslint/parser": "5.40.1",
-        "eslint": "8.26.0",
-        "eslint-plugin-jsdoc": "39.3.20",
+        "@typescript-eslint/eslint-plugin": "5.58.0",
+        "@typescript-eslint/parser": "5.58.0",
+        "eslint": "8.38.0",
+        "eslint-plugin-jsdoc": "41.1.1",
         "eslint-plugin-ordered-imports": "0.6.0",
-        "eslint-plugin-unicorn": "44.0.2",
-        "prettier": "2.7.1",
-        "rimraf": "3.0.2",
-        "typedoc": "0.23.17",
-        "typescript": "4.8.4"
+        "eslint-plugin-unicorn": "46.0.0",
+        "prettier": "2.8.7",
+        "rimraf": "5.0.0",
+        "typedoc": "0.24.1",
+        "typescript": "5.0.4"
     },
     "peerDependencies": {
-        "typedoc": "0.23.x"
+        "typedoc": "0.23.x || 0.24.x"
     },
     "repository": {
         "type": "git",
