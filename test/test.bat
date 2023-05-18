@@ -16,4 +16,8 @@ echo ============================= REPLACE ONLY IN CODE COMMENT TEXT ===========
 call npx typedoc --options replace-only-in-code-comment-text/typedoc.json
 call npx cypress run --quiet --spec "replace-only-in-code-comment-text/test.cy.ts"
 
+echo ============================= REPLACE ONLY IN CODE COMMENT TAGS ====================================
+call npx typedoc --options replace-only-in-code-comment-tags/typedoc.json
+call npx cypress run --quiet --spec "replace-only-in-code-comment-tags/test.cy.ts"
+
 echo ======================================== FINISHED ==================================================

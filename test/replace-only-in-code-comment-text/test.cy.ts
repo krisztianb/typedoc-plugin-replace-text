@@ -31,7 +31,7 @@ describe("functions/a.A.html", () => {
     });
 });
 
-describe("functions/a.A.html", () => {
+describe("functions/b.B.html", () => {
     beforeEach(() => {
         cy.visit("./replace-only-in-code-comment-text/output/functions/b.B.html");
     });

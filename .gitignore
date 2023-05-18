@@ -3,4 +3,5 @@ dist
 node_modules
 
 test/cypress
+test/replace-only-in-code-comment-tags/output
 test/replace-only-in-code-comment-text/output
