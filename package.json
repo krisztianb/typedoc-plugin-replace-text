@@ -14,6 +14,7 @@
         "@types/node": "14.18.1",
         "@typescript-eslint/eslint-plugin": "5.58.0",
         "@typescript-eslint/parser": "5.58.0",
+        "cypress": "12.12.0",
         "eslint": "8.38.0",
         "eslint-plugin-jsdoc": "41.1.1",
         "eslint-plugin-ordered-imports": "0.6.0",
@@ -38,6 +39,7 @@
     "scripts": {
         "lint": "eslint ./src",
         "format": "prettier --check ./src",
-        "build": "rimraf dist && tsc"
+        "build": "rimraf dist && tsc",
+        "test": "cd test  && test.bat"
     }
 }

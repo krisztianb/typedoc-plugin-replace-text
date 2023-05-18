@@ -1,3 +1,6 @@
 .vscode
 dist
 node_modules
+
+test/cypress
+test/replace-only-in-code-comment-text/output

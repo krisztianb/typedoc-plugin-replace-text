@@ -40,7 +40,7 @@ The plugin requires TypeDoc version 0.23.x or 0.24.x to be installed.
 
 ## Configuration
 
-Extend your [TypeDoc config file](https://typedoc.org/guides/options/) with a new option named `replaceText`. The option is defined as an object that looks like this:
+Extend your [TypeDoc config file](https://typedoc.org/options/configuration/) with a new option named `replaceText`. The option is defined as an object that looks like this:
 
 ```json
 "replaceText": {
