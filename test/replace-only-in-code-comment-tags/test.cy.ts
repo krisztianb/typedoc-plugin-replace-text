@@ -6,7 +6,9 @@ describe("index.html", () => {
 
     it("has the original text", () => {
         cy.contains(".col-content", "WAS_REPLACED1").should("not.exist");
+        cy.contains(".col-content", "WAS_REPLACED2").should("not.exist");
         cy.contains(".col-content", "REPLACE1");
+        cy.contains(".col-content", "REPLACE2");
     });
 });
 

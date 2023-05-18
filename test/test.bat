@@ -20,4 +20,8 @@ echo ============================= REPLACE ONLY IN CODE COMMENT TAGS ===========
 call npx typedoc --options replace-only-in-code-comment-tags/typedoc.json
 call npx cypress run --quiet --spec "replace-only-in-code-comment-tags/test.cy.ts"
 
+echo =============================== REPLACE ONLY IN INCLUDED FILES =====================================
+call npx typedoc --options replace-only-in-included-files/typedoc.json
+call npx cypress run --quiet --spec "replace-only-in-included-files/test.cy.ts"
+
 echo ======================================== FINISHED ==================================================
