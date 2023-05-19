@@ -5,6 +5,7 @@
     "out": "output",
     "tsconfig": "tsconfig.json",
     "readme": "MAIN.md",
+    "includes": ".",
     "plugin": ["typedoc-plugin-replace-text"],
     "replaceText": {
         "inCodeCommentText": false,
