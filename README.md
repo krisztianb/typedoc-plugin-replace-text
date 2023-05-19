@@ -10,7 +10,7 @@ This includes:
 -   Text in the main README
 -   Text in [included markdown files](https://typedoc.org/guides/options/#includes)
 
-You can specify matching patterns and the text they should be replaced with.
+You can specify matching patterns and the text they should be replaced with or a replacer function.
 
 This can be useful for:
 
@@ -26,39 +26,51 @@ This can be useful for:
 This module can be installed using [npm](https://www.npmjs.com/package/typedoc-plugin-replace-text):
 
 ```sh
-$ npm install typedoc-plugin-replace-text --save-dev
+$ npm install --save-dev typedoc-plugin-replace-text
 ```
 
-Version **0.23.x** of TypeDoc automatically detects plugins installed via npm.
-If you are using version **0.24.x** of TypeDoc you need to [activate the plugin with a command line argument](https://typedoc.org/options/configuration/#plugin).
-
-After installation TypeDoc can be used normally and you can configure this plugin as described below.
-
-### Requirements
+## Requirements
 
 The plugin requires TypeDoc version 0.23.x or 0.24.x to be installed.
 
+Version **0.23.x** of TypeDoc automatically detects plugins installed via npm.
+If you are using version **0.24.x** of TypeDoc you need to [activate the plugin with the plugin option](https://typedoc.org/options/configuration/#plugin) in your TypeDoc config.
+
+After installation TypeDoc can be used normally and you can configure this plugin as described below.
+
 ## Configuration
 
-Extend your [TypeDoc config file](https://typedoc.org/options/configuration/) with a new option named `replaceText`. The option is defined as an object that looks like this:
+Extend your [TypeDoc config file](https://typedoc.org/options/configuration/) with a new option named `replaceText`. Here is an example using a JavaScript config file:
 
-```json
-"replaceText": {
-    "inCodeCommentText": true,
-    "inCodeCommentTags": true,
-    "inIncludedFiles": true,
-    "replacements": [
-        {
-            "pattern": "(GH-(\\d+))",
-            "replace": "[$1](https://github.com/your-name/the-repo/issues/$2)"
-        },
-        {
-            "pattern": "King Kong",
-            "flags": "gi",
-            "replace": "[King Kong](https://github.com/king-kong)"
-        }
-    ]
-}
+```js
+/** @type {import('typedoc').TypeDocOptions} */
+module.exports = {
+    $schema: "https://typedoc.org/schema.json",
+    entryPointStrategy: "expand",
+    entryPoints: ["input/module1.ts", "input/module2.ts"],
+    out: "output",
+    tsconfig: "tsconfig.json",
+    readme: "MAIN.md",
+    plugin: ["typedoc-plugin-replace-text"],
+    replaceText: {
+        inCodeCommentText: true,
+        inCodeCommentTags: true,
+        inIncludedFiles: true,
+        replacements: [
+            {
+                pattern: "(GH-(\\d+))",
+                replace: "[$1](https://github.com/your-name/the-repo/issues/$2)"
+            },
+            {
+                pattern: "King Kong",
+                flags: "gi",
+                replace: (match) => {
+                    return match + " is the greatest!";
+                },
+            },
+        ],
+    },
+};
 ```
 
 Explanation:
@@ -68,7 +80,7 @@ Explanation:
 | **inCodeCommentText** | Specifies if the plugin should replace in the text of comments (not including the text of tags like the description of parameters for a method) in your code. (optional - defaults to `true`) |
 | **inCodeCommentTags** | Specifies if the plugin should replace in the text of tags (like the description of parameters for a method) in your code comments. (optional - defaults to `true`) |
 | **inIncludedFiles**   | Specifies if the plugin should replace in included markdown files (this includes the main README). (optional - defaults to `true`) |
-| **replacements**      | The search patterns and texts they should be replaced with. (`pattern` is the search Regex, `flags` are the optional Regex flags that default to `g` and `replace` is the inserted text) |
+| **replacements**      | The search patterns and texts they should be replaced with. (`pattern` is the search Regex and `flags` are the optional Regex flags that default to `g`. `replace` can be a string constant or a [replacer function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_function_as_the_replacement) that returns the new text for each match.) |
 
 ## Bugs
 
