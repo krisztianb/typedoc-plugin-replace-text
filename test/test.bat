@@ -24,4 +24,8 @@ echo =============================== REPLACE ONLY IN INCLUDED FILES ============
 call npx typedoc --options replace-only-in-included-files/typedoc.json
 call npx cypress run --quiet --spec "replace-only-in-included-files/test.cy.ts"
 
+echo =================================== REPLACE WITH FUNCTION ==========================================
+call npx typedoc --options replace-with-function/typedoc.config.cjs
+call npx cypress run --quiet --spec "replace-with-function/test.cy.ts"
+
 echo ======================================== FINISHED ==================================================

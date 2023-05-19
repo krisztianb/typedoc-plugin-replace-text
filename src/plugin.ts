@@ -119,7 +119,12 @@ export class Plugin {
     private applyReplacementsToString(str: string): string {
         let result = str;
 
-        this.options.replacements.forEach((r) => (result = result.replace(r.regex, r.replace)));
+        for (const replacement of this.options.replacements) {
+            result =
+                typeof replacement.replace === "string"
+                    ? result.replace(replacement.regex, replacement.replace)
+                    : result.replace(replacement.regex, replacement.replace); // duplication but otherwise TS complains
+        }
 
         return result;
     }
