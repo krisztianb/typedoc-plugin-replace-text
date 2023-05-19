@@ -1,6 +1,5 @@
 /** @type {import('typedoc').TypeDocOptions} */
 module.exports = {
-    $schema: "https://typedoc.org/schema.json",
     entryPointStrategy: "expand",
     entryPoints: ["input/a.ts", "input/b.ts"],
     out: "output",

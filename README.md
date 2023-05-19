@@ -45,10 +45,9 @@ Extend your [TypeDoc config file](https://typedoc.org/options/configuration/) wi
 ```js
 /** @type {import('typedoc').TypeDocOptions} */
 module.exports = {
-    $schema: "https://typedoc.org/schema.json",
+    out: "output",
     entryPointStrategy: "expand",
     entryPoints: ["input/module1.ts", "input/module2.ts"],
-    out: "output",
     tsconfig: "tsconfig.json",
     readme: "MAIN.md",
     plugin: ["typedoc-plugin-replace-text"],
