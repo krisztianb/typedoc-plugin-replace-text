@@ -1,0 +1,25 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "entryPointStrategy": "expand",
+    "entryPoints": ["input/a.ts", "input/b.ts"],
+    "out": "output",
+    "tsconfig": "tsconfig.json",
+    "readme": "MAIN.md",
+    "plugin": ["typedoc-plugin-replace-text"],
+    "replaceText": {
+        "inCodeCommentText": true,
+        "inCodeCommentTags": false,
+        "inIncludedFiles": false,
+        "replacements": [
+            {
+                "pattern": "REPLACE1",
+                "replace": "WAS_REPLACED1"
+            },
+            {
+                "pattern": "REPLACE\\d",
+                "flags": "gi",
+                "replace": "WAS_REPLACED2"
+            }
+        ]
+    }
+}

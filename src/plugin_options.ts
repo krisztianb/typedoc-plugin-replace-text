@@ -37,8 +37,8 @@ type ReplaceInfoFromConfig = {
     /** Flags for the regular expression pattern. */
     flags?: string;
 
-    /** The text that should be used as a replacement. */
-    replace: string;
+    /** The text that should be used as a replacement or a function that is called separately for each match. */
+    replace: string | Parameters<string["replace"]>[1];
 };
 
 /**
@@ -48,8 +48,8 @@ type ReplaceInfoWithRegex = {
     /** The regular expression object used to find the text that should be replaced. */
     regex: RegExp;
 
-    /** The text that should be used as a replacement. */
-    replace: string;
+    /** The text that should be used as a replacement or a function that is called separately for each match. */
+    replace: ReplaceInfoFromConfig["replace"];
 };
 
 /**
