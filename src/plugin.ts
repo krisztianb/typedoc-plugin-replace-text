@@ -37,7 +37,12 @@ export class Plugin {
         );
 
         // The priority makes sure that our event handler is called before TypeDoc converts the markdown content
-        typedoc.renderer.on(MarkdownEvent.PARSE, (e: MarkdownEvent) => this.onTypeDocMarkdownParse(e), typedoc, 100);
+        typedoc.renderer.on(
+            MarkdownEvent.INCLUDE,
+            (e: MarkdownEvent) => this.onTypeDocMarkdownInclude(e),
+            typedoc,
+            100,
+        );
     }
 
     /**
@@ -59,6 +64,10 @@ export class Plugin {
 
         const project = context.project;
 
+        if (this.options.replaceInIncludedFiles && project.readme) {
+            this.applyReplacementsToCommentParts(project.readme);
+        }
+
         // go through all the reflections' comments
         for (const key in project.reflections) {
             const reflection = project.reflections[key];
@@ -75,10 +84,10 @@ export class Plugin {
     }
 
     /**
-     * Triggered when the TypeDoc renderer parses a Markdown file.
-     * @param event Markdown parsing event information.
+     * Triggered when the TypeDoc renderer includes a Markdown file.
+     * @param event Markdown event information.
      */
-    public onTypeDocMarkdownParse(event: MarkdownEvent): void {
+    public onTypeDocMarkdownInclude(event: MarkdownEvent): void {
         if (!this.hasSomethingTodo) {
             return;
         }
