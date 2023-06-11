@@ -1,7 +1,7 @@
 /** @type {import('typedoc').TypeDocOptions} */
 module.exports = {
     entryPointStrategy: "expand",
-    entryPoints: ["input/a.ts", "input/b.ts"],
+    entryPoints: ["input/a.ts"],
     out: "output",
     tsconfig: "tsconfig.json",
     readme: "MAIN.md",
