@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2023-06-11
+### Breaking Changes
+-   Support changed to TypeDoc versions 0.24.8 and above because we need a new TypeDoc event to fix a bug properly.
+### Added
+-   You can now define a replacer function in your config that is called for each pattern match. (see Issue #4 on GH)
+### Fixed
+-   Option `inIncludedFiles` is too greedy and overrides the other options when set to `true`. (see Issue #5 on GH)
+
 ## [2.2.0] - 2023-04-15
 ### Changes
 -   Added support for latest TypeDoc version 0.24.x.
@@ -22,7 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2022-04-07
 First release
 
-[unreleased]: https://github.com/krisztianb/typedoc-plugin-replace-text/compare/v2.2.0...HEAD
+[unreleased]: https://github.com/krisztianb/typedoc-plugin-replace-text/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/krisztianb/typedoc-plugin-replace-text/releases/tag/v3.0.0
 [2.2.0]: https://github.com/krisztianb/typedoc-plugin-replace-text/releases/tag/v2.2.0
 [2.1.0]: https://github.com/krisztianb/typedoc-plugin-replace-text/releases/tag/v2.1.0
 [2.0.0]: https://github.com/krisztianb/typedoc-plugin-replace-text/releases/tag/v2.0.0

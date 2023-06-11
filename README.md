@@ -6,8 +6,8 @@ This is a plugin for [TypeDoc](https://github.com/TypeStrong/typedoc) that repla
 
 This includes:
 
--   Text in code comments
--   Text in the main README
+-   Text in code comments (eg: method descriptions and method parameter descriptions)
+-   Text in the main README that is used by TypeDoc
 -   Text in [included markdown files](https://typedoc.org/guides/options/#includes)
 
 You can specify matching patterns and the text they should be replaced with or a replacer function.
@@ -17,8 +17,8 @@ This can be useful for:
 -   Creating links from ticket IDs (eg: replace "GH-12345" with a link to https://github.com/your-name/the-repo/issues/12345)
 -   Creating links from author names (eg: link "Your Name" to your GitHub or corporate profile page)
 -   Replacing internal URLs (domains) with external ones
--   Replacing custom placeholders with anything you like (eg: images)
--   Removing URLs or other text from your documentation
+-   Replacing custom placeholders with anything you like (eg: images or content from external files)
+-   Removing URLs, user names, passwords or other text from your documentation
 -   etc.
 
 ## Installation
@@ -31,10 +31,7 @@ $ npm install --save-dev typedoc-plugin-replace-text
 
 ## Requirements
 
-The plugin requires TypeDoc version 0.23.x or 0.24.x to be installed.
-
-Version **0.23.x** of TypeDoc automatically detects plugins installed via npm.
-If you are using version **0.24.x** of TypeDoc you need to [activate the plugin with the plugin option](https://typedoc.org/options/configuration/#plugin) in your TypeDoc config.
+The plugin requires TypeDoc version 0.24.8 or above to be installed. You need to [activate the plugin with the plugin option](https://typedoc.org/options/configuration/#plugin) in your TypeDoc config.
 
 After installation TypeDoc can be used normally and you can configure this plugin as described below.
 
