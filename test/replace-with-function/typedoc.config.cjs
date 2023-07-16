@@ -1,4 +1,4 @@
-/** @type {import('typedoc').TypeDocOptions} */
+/** @type {import('typedoc').TypeDocOptionMap & import('typedoc-plugin-replace-text').Config } */
 module.exports = {
     entryPointStrategy: "expand",
     entryPoints: ["input/a.ts"],

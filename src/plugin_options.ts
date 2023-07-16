@@ -13,14 +13,14 @@ declare module "typedoc" {
 /**
  * A type for the options of the plugin.
  */
-type PluginConfig = {
+export type PluginConfig = {
     /** Should the plugin replace in the text of code comments? */
     inCodeCommentText?: boolean;
 
     /** Should the plugin replace in the text of code comment tags? */
     inCodeCommentTags?: boolean;
 
-    /** Should the plugin replace in the content of the README.md file? */
+    /** Should the plugin replace in included Markdown files? This includes the README.md file. */
     inIncludedFiles?: boolean;
 
     /** The objects describing what and with what it should be replaced. */
@@ -62,7 +62,7 @@ export class PluginOptions {
     /** Should the plugin replace in the text of code comment tags? */
     private _replaceInCodeCommentTags = true;
 
-    /** Should the plugin replace in the content of the README.md file? */
+    /** Should the plugin replace in included Markdown files? This includes the README.md file. */
     private _replaceInIncludedFiles = true;
 
     /** The replace information. */
@@ -129,8 +129,8 @@ export class PluginOptions {
     }
 
     /**
-     * Returns if the plugin should apply the replacements to the README.md content.
-     * @returns True if the plugin should apply the replacements to the README.md content, otherwise false.
+     * Returns if the plugin should apply the replacements to included Markdown files.
+     * @returns True if the plugin should apply the replacements to included Markdown files, otherwise false.
      */
     public get replaceInIncludedFiles(): boolean {
         return this._replaceInIncludedFiles;
