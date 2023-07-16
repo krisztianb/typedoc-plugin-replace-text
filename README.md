@@ -40,7 +40,7 @@ After installation TypeDoc can be used normally and you can configure this plugi
 Extend your [TypeDoc config file](https://typedoc.org/options/configuration/) with a new option named `replaceText`. Here is an example using a JavaScript config file:
 
 ```js
-/** @type {import('typedoc').TypeDocOptions} */
+/** @type {import('typedoc').TypeDocOptionMap & import('typedoc-plugin-replace-text').Config } */
 module.exports = {
     out: "output",
     entryPointStrategy: "expand",
