@@ -11,7 +11,7 @@ if (!fs.existsSync("..\\dist")) {
 
 console.log("Copying current build of plugin to node_modules for testing...");
 
-fs.rm("..\\node_modules\\typedoc-plugin-replace-text", { recursive: true, force: true });
+fs.rm("..\\node_modules\\typedoc-plugin-replace-text", { recursive: true, force: true }, () => {});
 fs.mkdirSync("..\\node_modules\\typedoc-plugin-replace-text\\dist", { recursive: true });
 fs.copyFileSync("..\\package.json", "..\\node_modules\\typedoc-plugin-replace-text\\package.json");
 fs.cpSync("..\\dist", "..\\node_modules\\typedoc-plugin-replace-text\\dist", { recursive: true });
