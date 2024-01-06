@@ -1,4 +1,4 @@
-import { Application, ParameterType } from "typedoc";
+import { Application, ParameterType, SourceReference } from "typedoc";
 
 /**
  * Extend typedoc's options with the plugin's option using declaration merging.
@@ -38,7 +38,7 @@ type ReplaceInfoFromConfig = {
     flags?: string;
 
     /** The text that should be used as a replacement or a function that is called separately for each match. */
-    replace: string | Parameters<string["replace"]>[1];
+    replace: string | (Parameters<string["replace"]>[1] & ThisType<{ sources: SourceReference[] | undefined }>);
 };
 
 /**
