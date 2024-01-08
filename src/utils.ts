@@ -8,9 +8,5 @@ import { DeclarationReflection, ReferenceReflection, Reflection, SignatureReflec
 export function hasSources(
     reflection: Reflection,
 ): reflection is DeclarationReflection | ReferenceReflection | SignatureReflection {
-    return (
-        reflection instanceof DeclarationReflection ||
-        reflection instanceof ReferenceReflection ||
-        reflection instanceof SignatureReflection
-    );
+    return 'sources' in reflection;
 }
