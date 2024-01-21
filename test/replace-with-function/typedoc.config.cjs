@@ -13,8 +13,12 @@ module.exports = {
         replacements: [
             {
                 pattern: "REPLACE1",
-                // eslint-disable-next-line @typescript-eslint/explicit-function-return-type -- No types in JS, duh...
-                replace: () => {
+                // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+                replace: function () {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                    if (this.sources?.[0].fileName !== "a.ts") {
+                        throw new Error("Expected to see source code information for the file 'a.ts'");
+                    }
                     return "WAS_REPLACED_BY_FUNCTION";
                 },
             },

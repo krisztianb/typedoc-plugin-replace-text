@@ -1,5 +1,6 @@
-import { Application, CommentDisplayPart, Context, Converter, MarkdownEvent } from "typedoc";
+import { Application, CommentDisplayPart, Context, Converter, MarkdownEvent, SourceReference } from "typedoc";
 import { PluginOptions } from "./plugin_options";
+import { hasSources } from "./utils";
 
 /**
  * The "Replace Text" plugin.
@@ -36,12 +37,11 @@ export class Plugin {
             this.onTypeDocConverterResolveBegin(c),
         );
 
-        // The priority makes sure that our event handler is called before TypeDoc converts the markdown content
         typedoc.renderer.on(
             MarkdownEvent.INCLUDE,
             (e: MarkdownEvent) => this.onTypeDocMarkdownInclude(e),
             typedoc,
-            100,
+            100, // this makes sure that our event handler is called before TypeDoc converts the markdown content
         );
     }
 
@@ -73,11 +73,15 @@ export class Plugin {
             const reflection = project.reflections[key];
 
             if (reflection.comment) {
+                const sources = hasSources(reflection) ? reflection.sources ?? [] : undefined;
+
                 if (this.options.replaceInCodeCommentText) {
-                    this.applyReplacementsToCommentParts(reflection.comment.summary);
+                    this.applyReplacementsToCommentParts(reflection.comment.summary, sources);
                 }
                 if (this.options.replaceInCodeCommentTags) {
-                    reflection.comment.blockTags.forEach((tag) => this.applyReplacementsToCommentParts(tag.content));
+                    reflection.comment.blockTags.forEach((tag) =>
+                        this.applyReplacementsToCommentParts(tag.content, sources),
+                    );
                 }
             }
         }
@@ -113,26 +117,28 @@ export class Plugin {
     /**
      * Applies the replacements to the given text parts.
      * @param parts The text parts on which to apply the replacements.
+     * @param sources Information about the source of the comment parts.
      */
-    private applyReplacementsToCommentParts(parts: CommentDisplayPart[]): void {
+    private applyReplacementsToCommentParts(parts: CommentDisplayPart[], sources?: SourceReference[]): void {
         parts.forEach((part) => {
-            part.text = this.applyReplacementsToString(part.text);
+            part.text = this.applyReplacementsToString(part.text, sources);
         });
     }
 
     /**
      * Applies the replacements to the given string.
      * @param str The string on which to apply the replacements.
+     * @param sources Information about the source of the string.
      * @returns The string with the replacements applied to it.
      */
-    private applyReplacementsToString(str: string): string {
+    private applyReplacementsToString(str: string, sources?: SourceReference[]): string {
         let result = str;
 
         for (const replacement of this.options.replacements) {
             result =
                 typeof replacement.replace === "string"
                     ? result.replace(replacement.regex, replacement.replace)
-                    : result.replace(replacement.regex, replacement.replace); // duplication but otherwise TS complains
+                    : result.replace(replacement.regex, replacement.replace.bind({ sources }));
         }
 
         return result;

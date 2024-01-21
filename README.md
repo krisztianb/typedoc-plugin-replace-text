@@ -60,7 +60,10 @@ module.exports = {
             {
                 pattern: "King Kong",
                 flags: "gi",
-                replace: (match) => {
+                replace: function (match) {
+                    if (this.sources && this.sources[0].fileName == "king-kong.ts") {
+                        return match + " is home!";
+                    }
                     return match + " is the greatest!";
                 },
             },
@@ -76,7 +79,7 @@ Explanation:
 | **inCodeCommentText** | Specifies if the plugin should replace in the text of comments (not including the text of tags like the description of parameters for a method) in your code. (optional - defaults to `true`) |
 | **inCodeCommentTags** | Specifies if the plugin should replace in the text of tags (like the description of parameters for a method) in your code comments. (optional - defaults to `true`) |
 | **inIncludedFiles**   | Specifies if the plugin should replace in included markdown files (this includes the main README). (optional - defaults to `true`) |
-| **replacements**      | The search patterns and texts they should be replaced with. (`pattern` is the search Regex and `flags` are the optional Regex flags that default to `g`. `replace` can be a string constant or a [replacer function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_function_as_the_replacement) that returns the new text for each match.) |
+| **replacements**      | The search patterns and texts they should be replaced with. (`pattern` is the search Regex and `flags` are the optional Regex flags that default to `g`. `replace` can be a string constant or a [replacer function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_function_as_the_replacement) that returns the new text for each match. The replacer function also has access to source information through the function context `this` - see example above where the `sources` property is an array of [TypeDoc SourceReference](https://typedoc.org/api/classes/Models.SourceReference.html) objects.) |
 
 ## Bugs
 
