@@ -138,7 +138,7 @@ export class Plugin {
             result =
                 typeof replacement.replace === "string"
                     ? result.replace(replacement.regex, replacement.replace)
-                    : result.replace(replacement.regex, replacement.replace.bind({ sources: sources }));
+                    : result.replace(replacement.regex, replacement.replace.bind({ sources }));
         }
 
         return result;

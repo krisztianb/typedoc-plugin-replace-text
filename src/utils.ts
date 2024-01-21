@@ -1,9 +1,9 @@
 import { DeclarationReflection, ReferenceReflection, Reflection, SignatureReflection } from "typedoc";
 
 /**
- * Checks if the given reflection has a "sources" property.
+ * Checks if the given reflection provides source code information.
  * @param reflection The reflection to check.
- * @returns True if the given reflection has a "sources" property, false otherwise.
+ * @returns True if the given reflection provides source code information, false otherwise.
  */
 export function hasSources(
     reflection: Reflection,

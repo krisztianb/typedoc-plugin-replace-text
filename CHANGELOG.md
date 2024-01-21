@@ -7,9 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [3.3.0] - 2024-01-06
+## [3.3.0] - 2024-01-21
 ### Added
--   When using a replacer function one now has access to source information through the function context "this". (see README example)
+-   When using a replacer function one now has access to the source code location through the function context "this". (see README example)
 
 ## [3.2.0] - 2023-09-01
 ### Added
