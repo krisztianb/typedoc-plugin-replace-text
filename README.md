@@ -61,10 +61,10 @@ module.exports = {
                 pattern: "King Kong",
                 flags: "gi",
                 replace: function (match) {
-                    if (this.sources && this.sources[0].fileName == "king-kong.ts") {
+                    if (this.sources?.[0].fileName == "king-kong.ts") {
                         return match + " is home!";
                     }
-                    return match + " is the greatest!";
+                    return match + " in another file!";
                 },
             },
         ],
