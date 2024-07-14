@@ -31,7 +31,7 @@ $ npm install --save-dev typedoc-plugin-replace-text
 
 ## Requirements
 
-The plugin requires TypeDoc version 0.24.8 or above to be installed. You need to [activate the plugin with the plugin option](https://typedoc.org/options/configuration/#plugin) in your TypeDoc config.
+The plugin requires TypeDoc version 0.26.0 or above to be installed. You need to [activate the plugin with the plugin option](https://typedoc.org/options/configuration/#plugin) in your TypeDoc config.
 
 After installation TypeDoc can be used normally and you can configure this plugin as described below.
 
@@ -78,7 +78,7 @@ Explanation:
 | --------------------- | ----------------------------------------------------------------------------- |
 | **inCodeCommentText** | Specifies if the plugin should replace in the text of comments (not including the text of tags like the description of parameters for a method) in your code. (optional - defaults to `true`) |
 | **inCodeCommentTags** | Specifies if the plugin should replace in the text of tags (like the description of parameters for a method) in your code comments. (optional - defaults to `true`) |
-| **inMarkdown**   | Specifies if the plugin should replace in all Markdown content parsed by TypeDoc (this includes the main README and all MD files added to the documentation). NOTE: Since version 0.26 TypeDoc parses all code comments as Markdown. This means that setting this to 'true' will automatically overwrite the other two options above to 'true'. (optional - defaults to `true`) |
+| **inMarkdown**   | Specifies if the plugin should replace in all Markdown content parsed by TypeDoc (this includes the main README and all MD files added to the documentation). **NOTE:** Since version 0.26 TypeDoc parses all code comments as Markdown. This means that setting this to `true` will automatically overwrite the other two options above to `true`. (optional - defaults to `true`) |
 | **replacements**      | The search patterns and texts they should be replaced with. (`pattern` is the search Regex and `flags` are the optional Regex flags that default to `g`. `replace` can be a string constant or a [replacer function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_function_as_the_replacement) that returns the new text for each match. The replacer function also has access to source information through the function context `this` - see example above where the `sources` property is an array of [TypeDoc SourceReference](https://typedoc.org/api/classes/Models.SourceReference.html) objects.) |
 
 ## Bugs
