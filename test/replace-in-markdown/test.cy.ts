@@ -3,7 +3,7 @@ import { contentSelector, descriptionSelector, parameterSelector, returnSelector
 
 describe("index.html", () => {
     beforeEach(() => {
-        cy.visit("./replace-only-in-included-files/output/index.html");
+        cy.visit("./replace-in-markdown/output/index.html");
     });
 
     it("has the replaced text", () => {
@@ -14,9 +14,9 @@ describe("index.html", () => {
     });
 });
 
-describe("INCLUDED.html", () => {
+describe("documents/INCLUDED.html", () => {
     beforeEach(() => {
-        cy.visit("./replace-only-in-included-files/output/documents/INCLUDED.html");
+        cy.visit("./replace-in-markdown/output/documents/INCLUDED.html");
     });
 
     it("has the replaced text", () => {
@@ -29,7 +29,7 @@ describe("INCLUDED.html", () => {
 
 describe("functions/a.A.html", () => {
     beforeEach(() => {
-        cy.visit("./replace-only-in-included-files/output/functions/a.A.html");
+        cy.visit("./replace-in-markdown/output/functions/a.A.html");
     });
 
     it("has the replaced text in the comment description", () => {
@@ -48,9 +48,23 @@ describe("functions/a.A.html", () => {
     });
 });
 
+describe("documents/a.A.INCLUDED_by_a.html", () => {
+    beforeEach(() => {
+        cy.visit("./replace-in-markdown/output/documents/a.A.INCLUDED_by_a.html");
+    });
+
+    it("has the replaced text", () => {
+        cy.contains(contentSelector, "WAS_REPLACED1");
+        cy.contains(contentSelector, "WAS_REPLACED2");
+        cy.contains(contentSelector, "REPLACE1").should("not.exist");
+        cy.contains(contentSelector, "REPLACE2").should("not.exist");
+    });
+});
+
+
 describe("functions/b.B.html", () => {
     beforeEach(() => {
-        cy.visit("./replace-only-in-included-files/output/functions/b.B.html");
+        cy.visit("./replace-in-markdown/output/functions/b.B.html");
     });
 
     it("has the replaced text in the comment description", () => {
