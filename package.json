@@ -1,6 +1,6 @@
 {
     "name": "typedoc-plugin-replace-text",
-    "version": "3.3.0",
+    "version": "4.0.0",
     "description": "Plugin for TypeDoc that replaces text in the documentation",
     "author": {
         "name": "Krisztián Balla",
@@ -12,21 +12,21 @@
         "typedocplugin"
     ],
     "devDependencies": {
-        "@types/node": "18.16.17",
-        "@typescript-eslint/eslint-plugin": "6.19.0",
-        "@typescript-eslint/parser": "6.19.0",
-        "cypress": "13.6.3",
+        "@types/node": "20.14.10",
+        "@typescript-eslint/eslint-plugin": "7.16.0",
+        "@typescript-eslint/parser": "7.16.0",
+        "cypress": "13.13.0",
         "eslint": "8.56.0",
-        "eslint-plugin-jsdoc": "48.0.2",
+        "eslint-plugin-jsdoc": "48.7.0",
         "eslint-plugin-ordered-imports": "0.6.0",
-        "eslint-plugin-unicorn": "50.0.1",
-        "prettier": "3.2.4",
-        "rimraf": "5.0.5",
-        "typedoc": "0.25.7",
-        "typescript": "5.3.3"
+        "eslint-plugin-unicorn": "54.0.0",
+        "prettier": "3.3.3",
+        "rimraf": "6.0.1",
+        "typedoc": "0.26.4",
+        "typescript": "5.5.3"
     },
     "peerDependencies": {
-        "typedoc": "^0.24.8 || 0.25.x"
+        "typedoc": "0.26.x"
     },
     "repository": {
         "type": "git",
@@ -41,6 +41,6 @@
         "lint": "eslint ./src ./test",
         "format": "prettier --check ./src ./test",
         "build": "rimraf dist && tsc",
-        "test": "cd test && node test.js"
+        "test": "cd test && node prepare_test.js && node test.js"
     }
 }
