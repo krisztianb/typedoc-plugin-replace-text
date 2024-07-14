@@ -5,12 +5,12 @@
     "out": "output",
     "tsconfig": "tsconfig.json",
     "readme": "MAIN.md",
-    "includes": ".",
+    "projectDocuments": ["INCLUDED.md"],
     "plugin": ["typedoc-plugin-replace-text"],
     "replaceText": {
         "inCodeCommentText": false,
         "inCodeCommentTags": false,
-        "inIncludedFiles": true,
+        "inMarkdown": true,
         "replacements": [
             {
                 "pattern": "REPLACE1",

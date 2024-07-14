@@ -9,7 +9,7 @@ console.log("============================= REPLACE ONLY IN CODE COMMENT TAGS ===
 execSync("npx typedoc --options replace-only-in-code-comment-tags/typedoc.json", { stdio: "inherit" });
 execSync("npx cypress run --quiet --spec 'replace-only-in-code-comment-tags/test.cy.ts'", { stdio: "inherit" });
 
-console.log("=============================== REPLACE ONLY IN INCLUDED FILES =====================================");
+console.log("==================================== REPLACE IN MARKDOWN ===========================================");
 execSync("npx typedoc --options replace-only-in-included-files/typedoc.json", { stdio: "inherit" });
 execSync("npx cypress run --quiet --spec 'replace-only-in-included-files/test.cy.ts'", { stdio: "inherit" });
 
