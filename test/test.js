@@ -10,8 +10,8 @@ execSync("npx typedoc --options replace-only-in-code-comment-tags/typedoc.json",
 execSync("npx cypress run --quiet --spec 'replace-only-in-code-comment-tags/test.cy.ts'", { stdio: "inherit" });
 
 console.log("==================================== REPLACE IN MARKDOWN ===========================================");
-execSync("npx typedoc --options replace-only-in-included-files/typedoc.json", { stdio: "inherit" });
-execSync("npx cypress run --quiet --spec 'replace-only-in-included-files/test.cy.ts'", { stdio: "inherit" });
+execSync("npx typedoc --options replace-in-markdown/typedoc.json", { stdio: "inherit" });
+execSync("npx cypress run --quiet --spec 'replace-in-markdown/test.cy.ts'", { stdio: "inherit" });
 
 console.log("=================================== REPLACE WITH FUNCTION ==========================================");
 execSync("npx typedoc --options replace-with-function/typedoc.config.cjs", { stdio: "inherit" });

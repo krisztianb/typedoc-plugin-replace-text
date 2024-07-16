@@ -8,7 +8,7 @@ This includes:
 
 -   Text in code comments (eg: method descriptions and method parameter descriptions)
 -   Text in the main README that is used by TypeDoc
--   Text in [included markdown files](https://typedoc.org/guides/options/#includes)
+-   Text in [included documents](https://typedoc.org/tags/document/)
 
 You can specify matching patterns and the text they should be replaced with or a replacer function.
 
@@ -51,7 +51,7 @@ module.exports = {
     replaceText: {
         inCodeCommentText: true,
         inCodeCommentTags: true,
-        inMarkdown: true,
+        inMarkdown: false,
         replacements: [
             {
                 pattern: "(GH-(\\d+))",
@@ -61,7 +61,7 @@ module.exports = {
                 pattern: "King Kong",
                 flags: "gi",
                 replace: function (match) {
-                    if (this.sources?.[0].fileName == "king-kong.ts") {
+                    if (this.sources?.[0].fileName.endsWith("/king-kong.ts")) {
                         return match + " is home!";
                     }
                     return match + " in another file!";
@@ -78,7 +78,7 @@ Explanation:
 | --------------------- | ----------------------------------------------------------------------------- |
 | **inCodeCommentText** | Specifies if the plugin should replace in the text of comments (not including the text of tags like the description of parameters for a method) in your code. (optional - defaults to `true`) |
 | **inCodeCommentTags** | Specifies if the plugin should replace in the text of tags (like the description of parameters for a method) in your code comments. (optional - defaults to `true`) |
-| **inMarkdown**   | Specifies if the plugin should replace in all Markdown content parsed by TypeDoc (this includes the main README and all MD files added to the documentation). **NOTE:** Since version 0.26 TypeDoc parses all code comments as Markdown. This means that setting this to `true` will automatically overwrite the other two options above to `true`. (optional - defaults to `true`) |
+| **inMarkdown**   | Specifies if the plugin should replace in all Markdown content parsed by TypeDoc (this includes the main README and all MD files added to the documentation). **NOTE:** Since version 0.26 TypeDoc parses all code comments as Markdown too. This means that setting this to `true` will automatically overwrite the other two options above to `true`. (optional - defaults to `true`) |
 | **replacements**      | The search patterns and texts they should be replaced with. (`pattern` is the search Regex and `flags` are the optional Regex flags that default to `g`. `replace` can be a string constant or a [replacer function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_function_as_the_replacement) that returns the new text for each match. The replacer function also has access to source information through the function context `this` - see example above where the `sources` property is an array of [TypeDoc SourceReference](https://typedoc.org/api/classes/Models.SourceReference.html) objects.) |
 
 ## Bugs

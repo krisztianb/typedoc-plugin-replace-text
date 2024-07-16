@@ -7,10 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [4.0.0] - 2024-07-14
+## [4.0.0] - 2024-07-16
 ### BREAKING CHANGES
 -   Support changed to TypeDoc versions 0.26.x due to a breaking change in TypeDoc's API.
--   Option 'inIncludedFiles' is now named 'inMarkdown' and overwrites (see README) the other options.
+-   Option 'inIncludedFiles' has been replaced by the option 'inMarkdown' (see README).
 
 ## [3.3.0] - 2024-01-21
 ### Added
