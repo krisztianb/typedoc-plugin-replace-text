@@ -9,7 +9,7 @@
     "replaceText": {
         "inCodeCommentText": false,
         "inCodeCommentTags": true,
-        "inIncludedFiles": false,
+        "inMarkdown": false,
         "replacements": [
             {
                 "pattern": "REPLACE1",

@@ -6,5 +6,5 @@ test/cypress/screenshots
 test/cypress/videos
 test/replace-only-in-code-comment-tags/output
 test/replace-only-in-code-comment-text/output
-test/replace-only-in-included-files/output
+test/replace-in-markdown/output
 test/replace-with-function/output

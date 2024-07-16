@@ -38,9 +38,8 @@ export class Plugin {
         );
 
         typedoc.renderer.on(
-            MarkdownEvent.INCLUDE,
-            (e: MarkdownEvent) => this.onTypeDocMarkdownInclude(e),
-            typedoc,
+            MarkdownEvent.PARSE,
+            (e: MarkdownEvent) => this.onTypeDocMarkdownParse(e),
             100, // this makes sure that our event handler is called before TypeDoc converts the markdown content
         );
     }
@@ -64,16 +63,12 @@ export class Plugin {
 
         const project = context.project;
 
-        if (this.options.replaceInIncludedFiles && project.readme) {
-            this.applyReplacementsToCommentParts(project.readme);
-        }
-
         // go through all the reflections' comments
         for (const key in project.reflections) {
             const reflection = project.reflections[key];
 
             if (reflection.comment) {
-                const sources = hasSources(reflection) ? reflection.sources ?? [] : undefined;
+                const sources = hasSources(reflection) ? (reflection.sources ?? []) : undefined;
 
                 if (this.options.replaceInCodeCommentText) {
                     this.applyReplacementsToCommentParts(reflection.comment.summary, sources);
@@ -88,15 +83,15 @@ export class Plugin {
     }
 
     /**
-     * Triggered when the TypeDoc renderer includes a Markdown file.
+     * Triggered when the TypeDoc renderer parses Markdown.
      * @param event Markdown event information.
      */
-    public onTypeDocMarkdownInclude(event: MarkdownEvent): void {
+    public onTypeDocMarkdownParse(event: MarkdownEvent): void {
         if (!this.hasSomethingTodo) {
             return;
         }
 
-        if (this.options.replaceInIncludedFiles) {
+        if (this.options.replaceInMarkdown) {
             event.parsedText = this.applyReplacementsToString(event.parsedText);
         }
     }
@@ -109,7 +104,7 @@ export class Plugin {
         const shouldReplaceSomething =
             this.options.replaceInCodeCommentText ||
             this.options.replaceInCodeCommentTags ||
-            this.options.replaceInIncludedFiles;
+            this.options.replaceInMarkdown;
 
         return shouldReplaceSomething && this.options.replacements.length > 0;
     }

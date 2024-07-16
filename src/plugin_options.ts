@@ -20,8 +20,11 @@ export type PluginConfig = {
     /** Should the plugin replace in the text of code comment tags? */
     inCodeCommentTags?: boolean;
 
-    /** Should the plugin replace in included Markdown files? This includes the README.md file. */
-    inIncludedFiles?: boolean;
+    /**
+     * Should the plugin replace in Markdown? This includes the README.md file.
+     * Note: Since version 0.26 TypeDoc also parses code comments as Markdown!
+     */
+    inMarkdown?: boolean;
 
     /** The objects describing what and with what it should be replaced. */
     replacements?: ReplaceInfoFromConfig[];
@@ -62,8 +65,8 @@ export class PluginOptions {
     /** Should the plugin replace in the text of code comment tags? */
     private _replaceInCodeCommentTags = true;
 
-    /** Should the plugin replace in included Markdown files? This includes the README.md file. */
-    private _replaceInIncludedFiles = true;
+    /** Should the plugin replace in parsed Markdown? This includes the README.md file. */
+    private _replaceInMarkdown = true;
 
     /** The replace information. */
     private _replacements: ReplaceInfoWithRegex[] = [];
@@ -99,8 +102,8 @@ export class PluginOptions {
                 this._replaceInCodeCommentTags = config.inCodeCommentTags;
             }
 
-            if (config.inIncludedFiles !== undefined) {
-                this._replaceInIncludedFiles = config.inIncludedFiles;
+            if (config.inMarkdown !== undefined) {
+                this._replaceInMarkdown = config.inMarkdown;
             }
 
             if (Array.isArray(config.replacements)) {
@@ -129,11 +132,11 @@ export class PluginOptions {
     }
 
     /**
-     * Returns if the plugin should apply the replacements to included Markdown files.
-     * @returns True if the plugin should apply the replacements to included Markdown files, otherwise false.
+     * Returns if the plugin should apply the replacements to Markdown parsed by TypeDoc.
+     * @returns True if the plugin should apply the replacements to Markdown parsed by TypeDoc, otherwise false.
      */
-    public get replaceInIncludedFiles(): boolean {
-        return this._replaceInIncludedFiles;
+    public get replaceInMarkdown(): boolean {
+        return this._replaceInMarkdown;
     }
 
     /**

@@ -9,14 +9,15 @@ module.exports = {
     replaceText: {
         inCodeCommentText: true,
         inCodeCommentTags: false,
-        inIncludedFiles: false,
+        inMarkdown: false,
         replacements: [
             {
                 pattern: "REPLACE1",
                 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
                 replace: function () {
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                    if (this.sources?.[0].fileName !== "a.ts") {
+                    // eslint-disable-next-line max-len
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+                    if (!this.sources[0].fileName.endsWith("a.ts")) {
                         throw new Error("Expected to see source code information for the file 'a.ts'");
                     }
                     return "WAS_REPLACED_BY_FUNCTION";
