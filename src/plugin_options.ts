@@ -1,4 +1,4 @@
-import { Application, ParameterType, SourceReference } from "typedoc";
+import { type Application, ParameterType, type SourceReference } from "typedoc";
 
 /**
  * Extend typedoc's options with the plugin's option using declaration merging.

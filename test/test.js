@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { execSync } = require("child_process");
+import { execSync } from "node:child_process";
 
 console.log("============================= REPLACE ONLY IN CODE COMMENT TEXT ====================================");
 execSync("npx typedoc --options replace-only-in-code-comment-text/typedoc.json", { stdio: "inherit" });

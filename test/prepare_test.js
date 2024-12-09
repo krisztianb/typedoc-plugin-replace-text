@@ -1,28 +1,24 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const fs = require("fs");
+import fs from "node:fs/promises";
+import path from "node:path";
 
 console.log("=================================== SETTING UP THE TESTS ===========================================");
 
-if (!fs.existsSync("..\\dist")) {
+if (
+    !(await fs
+        .access(path.join("..", "dist"))
+        .then(() => true)
+        .catch(() => false))
+) {
     console.error("ERROR: Cannot find 'dist' folder. Did you forget to build the plugin with 'npm run build'?");
     process.exit(1);
 }
 
 console.log("Copying current build of plugin to node_modules for testing...");
+const nodeModulesSubDir = path.join("..", "node_modules", "typedoc-plugin-replace-text");
 
-fs.rm("..\\node_modules\\typedoc-plugin-replace-text", { recursive: true, force: true }, (rmErr) => {
-    if (rmErr) {
-        throw rmErr;
-    } else {
-        fs.mkdir("..\\node_modules\\typedoc-plugin-replace-text\\dist", { recursive: true }, (mkDirErr) => {
-            if (mkDirErr) {
-                throw mkDirErr;
-            } else {
-                fs.copyFileSync("..\\package.json", "..\\node_modules\\typedoc-plugin-replace-text\\package.json");
-                fs.cpSync("..\\dist", "..\\node_modules\\typedoc-plugin-replace-text\\dist", { recursive: true });
-            }
-        });
-    }
-});
+await fs.rm(nodeModulesSubDir, { recursive: true, force: true });
+await fs.mkdir(path.join(nodeModulesSubDir, "dist"), { recursive: true });
+await fs.copyFile(path.join("..", "package.json"), path.join(nodeModulesSubDir, "package.json"));
+await fs.cp(path.join("..", "dist"), path.join(nodeModulesSubDir, "dist"), { recursive: true });
 
 console.log("DONE\n");

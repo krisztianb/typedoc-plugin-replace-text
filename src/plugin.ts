@@ -1,6 +1,13 @@
-import { Application, CommentDisplayPart, Context, Converter, MarkdownEvent, SourceReference } from "typedoc";
-import { PluginOptions } from "./plugin_options";
-import { hasSources } from "./utils";
+import {
+    type Application,
+    type CommentDisplayPart,
+    type Context,
+    Converter,
+    MarkdownEvent,
+    type SourceReference,
+} from "typedoc";
+import { PluginOptions } from "./plugin_options.js";
+import { hasSources } from "./utils.js";
 
 /**
  * The "Replace Text" plugin.
