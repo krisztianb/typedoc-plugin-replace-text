@@ -48,9 +48,9 @@ describe("functions/a.A.html", () => {
     });
 });
 
-describe("documents/a.A.INCLUDED_by_a.html", () => {
+describe("documents/a.A.INCLUDED-by-a.html", () => {
     beforeEach(() => {
-        cy.visit("./replace-in-markdown/output/documents/a.A.INCLUDED_by_a.html");
+        cy.visit("./replace-in-markdown/output/documents/a.A.INCLUDED-by-a.html");
     });
 
     it("has the replaced text", () => {
@@ -60,7 +60,6 @@ describe("documents/a.A.INCLUDED_by_a.html", () => {
         cy.contains(contentSelector, "REPLACE2").should("not.exist");
     });
 });
-
 
 describe("functions/b.B.html", () => {
     beforeEach(() => {

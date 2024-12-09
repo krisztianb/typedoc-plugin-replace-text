@@ -1,4 +1,4 @@
-import { DeclarationReflection, ReferenceReflection, Reflection, SignatureReflection } from "typedoc";
+import { DeclarationReflection, ReferenceReflection, type Reflection, SignatureReflection } from "typedoc";
 
 /**
  * Checks if the given reflection provides source code information.
