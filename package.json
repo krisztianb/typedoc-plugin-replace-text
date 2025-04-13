@@ -1,7 +1,7 @@
 {
     "name": "typedoc-plugin-replace-text",
     "type": "module",
-    "version": "4.1.0",
+    "version": "4.2.0",
     "description": "Plugin for TypeDoc that replaces text in the documentation",
     "author": {
         "name": "Krisztián Balla",
