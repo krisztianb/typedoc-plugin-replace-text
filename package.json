@@ -13,18 +13,19 @@
         "typedocplugin"
     ],
     "devDependencies": {
-        "@types/node": "20.14.10",
-        "@typescript-eslint/eslint-plugin": "8.17.0",
-        "@typescript-eslint/parser": "8.17.0",
-        "cypress": "13.16.1",
-        "eslint": "8.57.1",
-        "eslint-plugin-jsdoc": "50.6.0",
-        "eslint-plugin-ordered-imports": "0.6.0",
-        "eslint-plugin-unicorn": "56.0.1",
-        "prettier": "3.4.2",
+        "@types/node": "22.14.1",
+        "@typescript-eslint/eslint-plugin": "8.29.1",
+        "@typescript-eslint/parser": "8.29.1",
+        "cypress": "14.3.0",
+        "eslint": "9.24.0",
+        "eslint-plugin-import": "2.31.0",
+        "eslint-plugin-jsdoc": "50.6.9",
+        "eslint-plugin-unicorn": "58.0.0",
+        "prettier": "3.5.3",
         "rimraf": "6.0.1",
         "typedoc": "0.27.4",
-        "typescript": "5.6.3"
+        "typescript": "5.6.3",
+        "typescript-eslint": "8.29.1"
     },
     "peerDependencies": {
         "typedoc": "0.26.x || 0.27.x"
@@ -39,7 +40,7 @@
         "CHANGELOG.md"
     ],
     "scripts": {
-        "lint": "eslint ./src ./test",
+        "lint": "eslint ./src",
         "format": "prettier --check ./src ./test",
         "build": "rimraf dist && tsc",
         "test": "cd test && node prepare_test.js && node test.js"

@@ -39,14 +39,18 @@ export class Plugin {
      * @param typedoc The TypeDoc application.
      */
     private subscribeToApplicationEvents(typedoc: Readonly<Application>): void {
-        typedoc.converter.on(Converter.EVENT_BEGIN, (c: Readonly<Context>) => this.onTypeDocConverterBegin(c));
-        typedoc.converter.on(Converter.EVENT_RESOLVE_BEGIN, (c: Readonly<Context>) =>
-            this.onTypeDocConverterResolveBegin(c),
-        );
+        typedoc.converter.on(Converter.EVENT_BEGIN, (c: Readonly<Context>) => {
+            this.onTypeDocConverterBegin(c);
+        });
+        typedoc.converter.on(Converter.EVENT_RESOLVE_BEGIN, (c: Readonly<Context>) => {
+            this.onTypeDocConverterResolveBegin(c);
+        });
 
         typedoc.renderer.on(
             MarkdownEvent.PARSE,
-            (e: MarkdownEvent) => this.onTypeDocMarkdownParse(e),
+            (e: MarkdownEvent) => {
+                this.onTypeDocMarkdownParse(e);
+            },
             100, // this makes sure that our event handler is called before TypeDoc converts the markdown content
         );
     }
@@ -81,9 +85,9 @@ export class Plugin {
                     this.applyReplacementsToCommentParts(reflection.comment.summary, sources);
                 }
                 if (this.options.replaceInCodeCommentTags) {
-                    reflection.comment.blockTags.forEach((tag) =>
-                        this.applyReplacementsToCommentParts(tag.content, sources),
-                    );
+                    reflection.comment.blockTags.forEach((tag) => {
+                        this.applyReplacementsToCommentParts(tag.content, sources);
+                    });
                 }
             }
         }
