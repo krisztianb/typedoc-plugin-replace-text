@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.2.0] - 2025-04-13
+### Added
+-   Added support for latest TypeDoc version 0.28.x.
+
 ## [4.1.0] - 2024-12-09
 ### Added
 -   Added support for latest TypeDoc version 0.27.x.
@@ -51,7 +55,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2022-04-07
 First release
 
-[unreleased]: https://github.com/krisztianb/typedoc-plugin-replace-text/compare/v4.1.0...HEAD
+[unreleased]: https://github.com/krisztianb/typedoc-plugin-replace-text/compare/v4.2.0...HEAD
+[4.2.0]: https://github.com/krisztianb/typedoc-plugin-replace-text/releases/tag/v4.2.0
 [4.1.0]: https://github.com/krisztianb/typedoc-plugin-replace-text/releases/tag/v4.1.0
 [4.0.0]: https://github.com/krisztianb/typedoc-plugin-replace-text/releases/tag/v4.0.0
 [3.3.0]: https://github.com/krisztianb/typedoc-plugin-replace-text/releases/tag/v3.3.0
