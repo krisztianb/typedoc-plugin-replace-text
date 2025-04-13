@@ -2,7 +2,7 @@
 
 # typedoc-plugin-replace-text
 
-This is a plugin for [TypeDoc](https://github.com/TypeStrong/typedoc) that replaces text in the documentation.
+This is a plugin for [TypeDoc](https://typedoc.org) that replaces text in the documentation.
 
 This includes:
 
@@ -31,13 +31,13 @@ $ npm install --save-dev typedoc-plugin-replace-text
 
 ## Requirements
 
-The plugin requires TypeDoc version 0.26.0 or above to be installed. You need to [activate the plugin with the plugin option](https://typedoc.org/options/configuration/#plugin) in your TypeDoc config.
+The plugin requires TypeDoc version 0.26.0 or above to be installed. You need to [activate the plugin with the plugin option](https://typedoc.org/documents/Options.Configuration.html) in your TypeDoc config.
 
 After installation TypeDoc can be used normally and you can configure this plugin as described below.
 
 ## Configuration
 
-Extend your [TypeDoc config file](https://typedoc.org/options/configuration/) with a new option named `replaceText`. Here is an example using a JavaScript config file:
+Extend your [TypeDoc config file](https://typedoc.org/documents/Options.Configuration.html#javascript-files) with a new option named `replaceText`. Here is an example using a JavaScript config file:
 
 ```js
 /** @type { import('typedoc').TypeDocOptionMap & import('typedoc-plugin-replace-text').Config } */
@@ -88,6 +88,6 @@ Thanks for your contribution!
 
 ## Donate
 
-If you find this piece of software helpful, please consider a donation. Any amount is greatly appreciated.
+If you find this piece of software helpful please consider a donation. Any amount is greatly appreciated and will motivate me to keep this project up to date.
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=67UU75EUH4S8A)
